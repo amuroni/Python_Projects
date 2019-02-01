@@ -28,3 +28,8 @@ for i in range(0, list_lenght):
 print()
 print("And this are all square numbers summed up: " + str(totalsquarenumber))
 
+# list comprehension - always written in square brackets
+
+L = [1, 2, 3, 4, 5]
+L = [x + 10 for x in L]
+print(L)
