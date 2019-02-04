@@ -132,7 +132,7 @@ def min3(*args):      # probably the best one
 
 print(min3(3, 4, 1, 2, 10, 5, 9))
 print(min3("bb", "aa", "cc", "dd", "a"))
-print(min3([2,2], [1,1], [3,3], [5,5], [0,1]))
+print(min3([2, 2], [1, 1], [3, 3], [5, 5], [0, 1]))
 print("****")
 
 
@@ -141,9 +141,10 @@ def max1(*args):
     tmp.sort()        # lets Python sort the list
     return tmp[-1]    # returns the LAST value of the list aka [-1], the max one
 
+
 print(max1(3, 4, 1, 2, 10, 5, 9))
 print(max1("bb", "aa", "cc", "dd", "a"))
-print(max1([2,2], [1,1], [3,3], [5,5], [0,1]))
+print(max1([2, 2], [1, 1], [3, 3], [5, 5], [0, 1]))
 print("****")
 
 # generalize a function to compute either a min or max value
@@ -167,3 +168,38 @@ print(minmax(lessthan, 4, 2, 1, 5, 6, 3))  # with *args, everything after test, 
 print(minmax(grtrthan, 4, 2, 1, 5, 6, 3))
 
 # btw, max and min are both python built-ins, so no need for custom functions!!
+print("****")
+
+# here is an intersect function for fun, just because we can do it
+
+
+def intersect(*args):                 # intersects one or more sequences
+    res = []                          # initial list is empty
+    for x in args[0]:                 # scans first sequence
+        if x in res:                  # checks for duplicates
+            continue                  # skip if it is a duplicate
+        for other in args[1:]:        # if not, for other args
+            if x not in other:        # item in both?
+                break                 # NO, then break out of loop
+        else:                         # if yes
+            res.append(x)             # add item at the end of res list obj
+    return res                        # return the list of intersects
+
+
+print(intersect([1, 2, 3, 4], (1, 4)))  # returns [1, 4]
+
+# we can also do an union function with the same mechanism
+
+def union(*args):
+    res =[]                          # empty list to start
+    for seq in args:                 # for each sequence
+        for x in seq:                # for each sequence value
+            if x not in res:         # if it's not in list res
+                res.append(x)        # append to the list
+    return res                       # return the list
+
+
+print(union([1, 2, 3, 4], (1, 4)))  # returns [1, 2, 3, 4]
+print("****")
+print(intersect(s1, s2), union(s1, s2)) #returns SAM end SPAMC
+print("****")
