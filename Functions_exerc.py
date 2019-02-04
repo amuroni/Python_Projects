@@ -201,5 +201,5 @@ def union(*args):
 
 print(union([1, 2, 3, 4], (1, 4)))  # returns [1, 2, 3, 4]
 print("****")
-print(intersect(s1, s2), union(s1, s2)) #returns SAM end SPAMC
+print(intersect(s1, s2), union(s1, s2))  # returns SAM end SPAMC
 print("****")
