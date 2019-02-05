@@ -203,3 +203,46 @@ print(union([1, 2, 3, 4], (1, 4)))  # returns [1, 2, 3, 4]
 print("****")
 print(intersect(s1, s2), union(s1, s2))  # returns SAM end SPAMC
 print("****")
+
+# INDIRECT FUNCTION CALLS
+
+
+def echo(message):                  # name echo assigned to func obj
+    print(message)
+
+
+echo("Direct Call.")                 # prints direct call, through original name
+
+x = echo                            # x references the function
+x("Indirect call!")                 # call through x by adding ()
+
+
+def indirect(func, arg):
+    func(arg)                       # the arg is called with ()
+
+
+indirect(echo, "Argument call!!")   # pass function to another function
+
+schedule = [(echo, "Spam"), (echo, "Ham")]
+for (func, arg) in schedule:        # call echo func for items in list
+    func(arg)                       # embedded call!
+
+
+def make(label):                       # function never gets called
+    def echo(message):
+        print(label + " : " + message)
+    return echo                        # function gets returned
+
+
+F = make("Spam")                       # label in scope is returned
+F("Ham")                               # calls the function that make returned
+F("Chicken")
+
+# function annotations -> code in def header lines
+
+
+def func(a, b, c) -> int:
+    return echo(a + b + c)                         # added echo to print directly :)
+
+
+func(1, 2, 3)                                      # = 6
