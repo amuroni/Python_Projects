@@ -44,3 +44,7 @@ echo(lower(1, 10))  # calling funct echo to print, for fun
 action = (lambda x:(lambda y: x + y))
 act = action(100)
 echo(act(1))  # that's 100+1
+
+# or even more:
+
+echo(((lambda x:(lambda y: x + y))(99))(4))  # return 103 (99+4)
