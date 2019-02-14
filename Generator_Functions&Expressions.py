@@ -170,3 +170,21 @@ print(list(myzip(S1, S2)))
 print(list(mymapPad(S1, S2)))
 print(list((mymapPad(S1, S2, pad=99))))
 
+# now we use a generator instead
+
+def myzip2(*seqs):
+    minlen = min(len(S) for S in seqs)
+    return (tuple(S[i] for S in seqs) for i in range (minlen))
+
+S1, S2 = "abc", "xyz123"
+print(list(myzip2(S1, S2)))
+
+# or even better, we can buld one that works for any iterable
+
+def myzip3(*args):
+    iters = list(map(iter, args))  # need to use list with map, or it will loop forever
+    while iters:
+        res = [next(i) for i in iters]
+        yield tuple(res)
+
+print(list(myzip3("abc", "lmnop")))
