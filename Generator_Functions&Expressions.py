@@ -188,3 +188,19 @@ def myzip3(*args):
         yield tuple(res)
 
 print(list(myzip3("abc", "lmnop")))
+
+# set and dictionary comprehension
+# used to pass generator expression to the type names
+# i.e.
+
+set(x * x for x in range(10))
+# or
+res = set()
+for x in range(10):
+    res.add(x * x)
+# or with a dictionary, too
+res = {}
+for x in range(10):
+    res[x] = x * x
+
+# sets or dict keys are not ordered!
