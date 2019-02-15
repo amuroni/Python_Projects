@@ -15,5 +15,15 @@ print(bob.lastName())  # call the method were "bob" is "self"
 print(sue.lastName())
 print(str(sue.pay) + " € before the raise")
 sue.giveRaise(.10)
-print(str(round(sue.pay)) + " € after the raise, nice!")
-# WELL NICE JOB MAN, nice job, I automatically rounded the number myself with no instructions, just by guessing. NICE
+print(str(round(sue.pay)) + " € after the raise, nice!") # rounded the number too
+print("***********")
+
+class rec: pass
+
+pers1 = rec()
+pers1.name = "Bob"
+pers1.job = ["dev", "manager"]
+pers1.age = 30
+
+print("My name is", pers1.name + ", I'm a", str(pers1.age) + " years old", pers1.job[0])
+
