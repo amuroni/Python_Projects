@@ -36,3 +36,50 @@ x = Indexer()  # assign the indexer to a variable
 print(x[0])  # returns value 5
 print(x[1])  # returns value 6
 print(x[-1])  # returns value 9
+
+
+class C:
+    def __index__(self):  # ths one returns an integer value for an instance
+        return 255
+
+# __getitem__ and index iteration
+
+
+class StepperIndex:
+    def __getitem__(self, i):
+        return self.data[i]
+
+
+X = StepperIndex()
+X.data = "SPAM"
+for item in X:
+    print(item, end=" - ")
+
+
+class Squares:
+    def __init__(self, start, stop):
+        self.value = start - 1
+        self.stop = stop
+
+    def __iter__(self):  # iterator object on iter
+        return self
+
+    def __next__(self):  # return square on each iteration
+        if self.value == self.stop:
+            raise StopIteration
+        self.value += 1
+        return self.value ** 2
+
+
+for i in Squares(1,5):
+    print(i, end=" ")
+
+
+# a lot easier like this anyway
+def gsquares(start, stop):
+    for i in range(start, stop+1):
+        yield i**2
+
+
+for i in gsquares(1, 5):
+    print(i, end=" ")
