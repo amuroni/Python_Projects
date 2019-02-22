@@ -55,6 +55,8 @@ X.data = "SPAM"
 for item in X:
     print(item, end=" - ")
 
+print()
+
 
 class Squares:
     def __init__(self, start, stop):
@@ -73,6 +75,7 @@ class Squares:
 
 for i in Squares(1,5):
     print(i, end=" ")
+print()
 
 
 # a lot easier like this anyway
@@ -83,3 +86,14 @@ def gsquares(start, stop):
 
 for i in gsquares(1, 5):
     print(i, end=" ")
+print()
+
+# or even easier:
+for i in (x ** 2 for x in range(1, 6)):
+    print(i, end=" ")
+print()
+
+# or the fastest version:
+
+print([x**2 for x in range(1,6)])
+print()
