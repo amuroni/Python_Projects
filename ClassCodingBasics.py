@@ -1,3 +1,5 @@
+from __future__ import print_function                                       # should be at the top
+
 """
 classes generate multiple instance objects:
 with class statements, a class obj is created and a name assigned to it
@@ -116,7 +118,7 @@ class Person:
 rec1 = Person("Bob", "Dev", 42)
 rec2 = Person("Joe", "Mgr")
 print(rec1.info())
-print(rec2.info())
+print(rec2.info()); print()
 
 """
 main classes ides:
@@ -124,3 +126,93 @@ INHERITANCE : attribute lookup (i.e. in x.name expressions etc)
 POLYMORPHISM: in x.method the meaning of method depends on the type/class of obj x
 ENCAPSULATION: methods and operators implement behavior + data hiding by default 
 """
+
+
+class Employee:                                                             # main class
+    def __init__(self, name, salary=0):
+        self.name = name
+        self.salary = salary
+
+    def giveRaise(self, percent):
+        self.salary = self.salary + (self.salary * percent)
+
+    def work(self):
+        print(self.name, "does stuff")
+
+    def __repr__(self):
+        return "<Employee: name=%s, salary=%s>" % (self.name, self.salary)
+
+
+class Chef(Employee):                                                       # chef subclass
+    def __init__(self, name):
+        Employee.__init__(self, name, 50000)                                # inherit employee attrs
+
+    def work(self):
+        print(self.name, "makes food")
+
+
+class Server(Employee):                                                     # server subclass
+    def __init__(self, name):
+        Employee.__init__(self, name, 40000)
+
+    def work(self):
+        print(self.name, "interfaces with customer")
+
+
+class PizzaRobot(Chef):                                                     # robot subclass
+    def __init__(self, name):
+        Chef.__init__(self, name)
+
+    def work(self):
+        print(self.name, "makes pizza")
+
+
+if __name__ == "__main__":
+    bob = PizzaRobot("bob")                          # create the robot
+    print(bob)                                       # base salary 40k
+    bob.work()                                       # print job
+    bob.giveRaise(0.2)                               # raise +20% - inherits giveRaise method from employee
+    print(bob); print()
+
+    for klass in Employee, Chef, Server, PizzaRobot:  # print all classes name + job
+        obj = klass(klass.__name__)
+        obj.work()
+print("****")
+
+
+class Customer:                                       # create customer class
+    def __init__(self, name):
+        self.name = name
+
+    def order(self, server):
+        print(self.name, "orders from", server)
+
+    def pay(self, server):
+        print(self.name, "pays for item to", server)
+
+
+class Oven:
+    def bake(self):
+        print("oven bakes")
+
+
+class PizzaShop:                                             # contains employees & oven classes
+    def __init__(self):
+        self.server = Server('Pat')                          # Embed other objects
+        self.chef = PizzaRobot('Bob')                        # A robot named bob
+        self.oven = Oven()
+
+    def order(self, name):
+        customer = Customer(name)                            # Activate other objects
+        customer.order(self.server)                          # Customer orders from server
+        self.chef.work()                                     # Chef makes pizza
+        self.oven.bake()                                     # Oven bakes pizza
+        customer.pay(self.server)                            # Customer pays pizza
+
+
+if __name__ == "__main__":
+    scene = PizzaShop()
+    scene.order("Homer")
+    print("****")
+    scene.order("Shaggy")
+
