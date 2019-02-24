@@ -78,6 +78,7 @@ class Rec:
 
 Rec.name = "Bob"  # assign objects and attributes
 Rec.age = 40
+Rec.jobs = ["dev", "mgr"]
 
 print(Rec.name)
 
@@ -89,3 +90,30 @@ print(x.name, y.name)  # still Bob, name stored in class
 x.name = "Sue"  # only affects x!
 print(Rec.name, x.name, y.name)  # x is now Sue, y is still Bob
 
+pers1 = Rec()
+pers1.name = "Bob"
+pers1.jobs ="dev"
+pers1.age = 40.5
+
+pers2 = Rec()
+pers2.name = "Joe"
+pers2.jobs = "Mgr"
+pers2.age = 42
+
+# better done by creating a specific Person class:
+
+class Person:
+
+    def __init__(self, name, jobs, age=None):
+        self.name = name
+        self.jobs = jobs
+        self.age = age
+
+    def info(self):
+        return self.name, self.jobs, self.age if self.age is not None else "Age not defined"
+
+
+rec1 = Person("Bob", "Dev", 42)
+rec2 = Person("Joe", "Mgr")
+print(rec1.info())
+print(rec2.info())
