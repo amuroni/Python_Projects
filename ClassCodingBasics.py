@@ -117,3 +117,10 @@ rec1 = Person("Bob", "Dev", 42)
 rec2 = Person("Joe", "Mgr")
 print(rec1.info())
 print(rec2.info())
+
+"""
+main classes ides:
+INHERITANCE : attribute lookup (i.e. in x.name expressions etc) 
+POLYMORPHISM: in x.method the meaning of method depends on the type/class of obj x
+ENCAPSULATION: methods and operators implement behavior + data hiding by default 
+"""
