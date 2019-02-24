@@ -216,3 +216,68 @@ if __name__ == "__main__":
     print("****")
     scene.order("Shaggy")
 
+print("******")
+
+
+class Processor:
+    def __init__(self, reader, writer):
+        self.reader = reader
+        self.writer = writer
+
+    def process(self):
+        while True:
+            data = self.reader.readline()
+            if not data: break
+            data = self.converter(data)
+            self.writer.write(data)
+
+    def converter(self, data):
+        assert False, "converter must be defined"
+
+
+class Uppercase(Processor):
+    def converter(self, data):
+        return data.upper()
+
+
+if __name__ == "__main__":
+    import sys
+    obj = Uppercase(open("data.txt"), sys.stdout)
+    obj.process()
+
+print("****")
+
+
+class Wrapper:
+    def __init__(self, object):
+        self.wrapped = object                   # save obj
+
+    def __getattr__(self, attrname):
+        print("Trace: " + attrname)             # trace fetch
+        return getattr(self.wrapped, attrname)  # delegate fetch to getattr function
+
+
+x = Wrapper([1, 2, 3])
+print(x.wrapped)
+x.append(4)
+print(x.wrapped); print("****")
+
+
+class Selfless:
+    def __init__(self, data):
+        self.data = data
+
+    def selfless(arg1, arg2):
+        return arg1 + arg2
+
+    def normal(self, arg1, arg2):         # expects an instance when called
+        return self.data + arg1 + arg2
+
+
+X = Selfless(2)
+
+print(X.normal(3, 4))            # passed to self automatically, so 2+3+4 = 9
+print(Selfless.normal(X, 3, 4))  # self expected by method, so auto pass: = 9
+print(Selfless.selfless(3, 4))   # no X instance: result = 7
+# Selfless.normal(3, 4)          Error: missing 1 pos arg - expected an X instance
+# X.selfless(3, 4)               Error: 2 pos args but 3 were given - does not expect the X instance
