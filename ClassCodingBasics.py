@@ -281,3 +281,72 @@ print(Selfless.normal(X, 3, 4))  # self expected by method, so auto pass: = 9
 print(Selfless.selfless(3, 4))   # no X instance: result = 7
 # Selfless.normal(3, 4)          Error: missing 1 pos arg - expected an X instance
 # X.selfless(3, 4)               Error: 2 pos args but 3 were given - does not expect the X instance
+
+# bound methods and other callable objs
+
+
+class Number:
+    def __init__(self, base):
+        self.base = base
+
+    def double(self):
+        return self.base * 2
+
+    def triple(self):
+        return self.base * 3
+
+
+x = Number(2)
+y = Number(3)
+z = Number(4)
+x.double()   # returns 4, like a normal call
+
+acts = [x.double, y.double, y.triple, x.triple, z.double]  # list of bound methods
+for act in acts:                                           # deferred calls for each obj
+    print(act())                                           # call as func
+
+
+def square(arg):
+    return arg ** 2
+
+
+class Sum:
+    def __init__(self, val):
+        self.val = val
+
+    def __call__(self, arg):
+        return self.val + arg
+
+
+class Product:
+    def __init__(self, val):
+        self.val = val
+
+    def method(self, arg):
+        return self.val * arg
+
+
+class Negate:
+    def __init__(self, val):
+        self.val = -val
+
+    def __repr__(self):
+        return str(self.val)
+
+
+print("*****")
+
+s_obj = Sum(2)
+p_obj = Product(3)
+
+actions = [square, s_obj, p_obj.method]
+for act in actions:
+    print(act(5))
+
+print(actions[+1](5))  # still 15, or p_obj on num 3 -> 5*3
+print([act(5) for act in actions])  # [25, 7, 15]
+print(list(map(lambda act: act(5), actions)))  # [25, 7, 15]
+
+actions = [square, s_obj, p_obj.method, Negate]  # also with Negate class
+for act in actions:
+    print(act(2))
