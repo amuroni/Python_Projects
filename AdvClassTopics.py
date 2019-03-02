@@ -90,3 +90,27 @@ if __name__ == "__main__":
     print(x, y, len(x), len(y))
     print(x.intersect(y), y.union(x))
     print(x & y, x | y)
+
+
+class C(object):
+    data = "Spam"
+
+    def __getattr__(self, name):
+        print("get attr: " + name)
+        return getattr(self.data, name)
+
+    def __getitem__(self, i):
+        print("get item: " + str(i))
+        return self.data[i]
+
+    def __add__(self, other):
+        print("add: " + other)
+        return getattr(self.data, "__add__")(other)
+
+
+X = C()
+print(X.upper())
+print(X[1])  # built-ins
+print(type(X).__getitem__(X, 1))  # class equivalent
+print(X + " eggs")
+type(X).__add__(X, "eggs")
