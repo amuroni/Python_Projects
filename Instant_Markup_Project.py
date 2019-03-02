@@ -3,7 +3,7 @@ It needs to classify various text elements and clearly mark them
 """
 
 import sys
-import re
+import re  # regular expressions module needed!
 
 
 # collect lines
