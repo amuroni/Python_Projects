@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 input_values = [1, 2, 3, 4, 5]  # define input values as x axis values
 squares = [1, 4, 9, 16, 25]  # dataset as y axis values
 
-#plt.plot(input_values, squares, linewidth=5)  # plot the x,y data in a chart + line thickness
+# plt.plot(input_values, squares, linewidth=5)  # plots the x,y data in a chart + line thickness
 plt.scatter(2, 4, s=290)  # plot a single point in the chart + size of the dot
 
 # set chart title and label axes
