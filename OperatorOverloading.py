@@ -2,7 +2,7 @@
 
 
 class Number:
-    def __init__(self, start):  # __init__ basic op. ovld ->initialize class using any arguments passed
+    def __init__(self, start):  # __init__.py basic op. ovld ->initialize class using any arguments passed
         self.data = start
 
     def __sub__(self, other):   # __sub__ intercepts subtraction expressions and return new class with result

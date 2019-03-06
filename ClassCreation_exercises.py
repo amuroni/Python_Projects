@@ -1,5 +1,5 @@
 # class Worker:
-#     def __init__(self, name, pay):  # defining the main class attributes, self is the subject of the class!
+#     def __init__.py(self, name, pay):  # defining the main class attributes, self is the subject of the class!
 #         self.name = name  # attribute aka "state information"
 #         self.pay = pay  # attribute aka "state information"
 #
@@ -34,7 +34,7 @@
 
 
 # class Person:
-#     def __init__(self, gender, name, job=None, pay=0):  # class with default args
+#     def __init__.py(self, gender, name, job=None, pay=0):  # class with default args
 #         self.gender = gender                            # added a gender attribute
 #         self.name = name
 #         self.job = job
@@ -51,7 +51,7 @@
 #
 #
 # class Manager:  # this one is a subclass of person! inherits person attrs; uses class delegation
-#     def __init__(self, gender, name, pay):
+#     def __init__.py(self, gender, name, pay):
 #         self.person = Person(gender, name, "mgr", pay)  # job =mgr by subclass default + embed person obj
 #
 #     def giveraise(self, percent, bonus=.10):
@@ -65,7 +65,7 @@
 
 
 # class Department:  # = aggregating embedded objs into a composite obj
-#     def __init__(self, *args):
+#     def __init__.py(self, *args):
 #         self.members = list(args)
 #
 #     def addmember(self, person):

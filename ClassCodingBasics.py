@@ -43,7 +43,7 @@ z.display()
 
 """
 methods with underscores __x__ are class constructors, called automatically in built-in operations, ex. __add__ = +
-__init__ run when new instance of obj is created;
+__init__.py run when new instance of obj is created;
 __add__ run when a + expression is used
 __str__ run when an obj is printed or converted to its print string by str function
 etc..
@@ -367,7 +367,7 @@ class ListInstance:  # overloads str method
 
 #
 # class Spam(ListInstance):
-#     def __init__(self):
+#     def __init__.py(self):
 #         self.data1 = "food"
 #
 #
